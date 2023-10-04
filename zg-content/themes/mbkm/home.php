@@ -283,8 +283,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 info">
-                <h4>MITRA MBKM UNIVERSITAS FAJAR</h4>
-                <p>Dalam Program Merdeka Belajar Kampus Merdeka Unifa memiliki beberapa mitra untuk terlaksanakan
+                <h4>MITRA MBKM POLITEKNIK LP3I MAKASSAR</h4>
+                <p>Dalam Program Merdeka Belajar Kampus Merdeka Politeknik LP3I Makassar memiliki beberapa mitra untuk
+                    terlaksanakan
                     progran ini, adapun mitra sebagai berikut :</p>
             </div>
             <div class="col-md-8 clients">
