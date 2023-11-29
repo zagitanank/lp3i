@@ -84,7 +84,6 @@ class jadwal extends PoCore
 						array('title' => 'Gel', 'options' => 'style="width:30px;"'),
 						array('title' => 'Periode Akademik', 'options' => 'class="no-sort"'),
 						array('title' => 'Tgl. Daftar', 'options' => 'class="no-sort"'),
-						array('title' => 'Seleksi', 'options' => 'class="no-sort"'),
 						array('title' => 'Tahun', 'options' => 'style="width:30px;"'),
 						array('title' => 'Aktif', 'options' => 'class="no-sort"'),
 						array('title' => 'Tindakan', 'options' => 'class="no-sort" style="width:50px;"')
@@ -146,18 +145,9 @@ class jadwal extends PoCore
 					return $this->tanggal_indo($row['mbkm_jadwal_awal']) . ' s/d ' . $this->tanggal_indo($row['mbkm_jadwal_akhir']);
 				}
 			),
+			array('db' => 'mbkm_jadwal_tahun', 'dt' => '5', 'field' => 'mbkm_jadwal_tahun'),
 			array(
-				'db' => $primarykey, 'dt' => '5', 'field' => $primarykey,
-				'formatter' => function ($d, $row, $i) {
-					return "Tanggal Tes: " . $this->tanggal_indo($row['mbkm_jadwal_tes_tulis']) . '<br/> 
-							Tanggal Wawancara: ' . $this->tanggal_indo($row['mbkm_jadwal_tes_wawancara']) . '<br/> 
-							Tanggal Pengumuman: ' . $this->tanggal_indo($row['mbkm_jadwal_pengumuman']) . '<br/> 
-							Tanggal Pembekalan: ' . $this->tanggal_indo($row['mbkm_jadwal_pembekalan']);
-				}
-			),
-			array('db' => 'mbkm_jadwal_tahun', 'dt' => '6', 'field' => 'mbkm_jadwal_tahun'),
-			array(
-				'db' => $primarykey, 'dt' => '7', 'field' => $primarykey,
+				'db' => $primarykey, 'dt' => '6', 'field' => $primarykey,
 				'formatter' => function ($d, $row, $i) {
 					if ($row['mbkm_jadwal_aktif'] == 'Y') {
 						$blockdata = "<a href='#' class='btn btn-xs btn-success'  data-toggle='tooltip' title='Aktif' >Aktif</a>";
@@ -168,7 +158,7 @@ class jadwal extends PoCore
 				}
 			),
 			array(
-				'db' => $primarykey, 'dt' => '8', 'field' => $primarykey,
+				'db' => $primarykey, 'dt' => '7', 'field' => $primarykey,
 				'formatter' => function ($d, $row, $i) {
 					return "<div class='text-center'>\n
 						<div class='btn-group btn-group-xs'>\n
@@ -242,10 +232,6 @@ class jadwal extends PoCore
 				'mbkm_jadwal_gelombang' => $this->postring->valid($_POST['gelombang'], 'sql'),
 				'mbkm_jadwal_awal' => $_POST['tahunawaldaftar'] . '-' . $_POST['bulanawaldaftar'] . '-' . $_POST['hariawaldaftar'],
 				'mbkm_jadwal_akhir' => $_POST['tahunakhirdaftar'] . '-' . $_POST['bulanakhirdaftar'] . '-' . $_POST['hariakhirdaftar'],
-				'mbkm_jadwal_pengumuman' => $_POST['tahunpengumuman'] . '-' . $_POST['bulanpengumuman'] . '-' . $_POST['haripengumuman'],
-				'mbkm_jadwal_tes_tulis' => $_POST['tahuntes'] . '-' . $_POST['bulantes'] . '-' . $_POST['harites'],
-				'mbkm_jadwal_tes_wawancara' => $_POST['tahunwawancara'] . '-' . $_POST['bulanwawancara'] . '-' . $_POST['hariwawancara'],
-				'mbkm_jadwal_pembekalan' => $_POST['tahunpembekalan'] . '-' . $_POST['bulanpembekalan'] . '-' . $_POST['haripembekalan'],
 				'mbkm_jadwal_tahun' => $this->postring->valid($_POST['tahun'], 'xss'),
 				'mbkm_jadwal_periode' => $this->postring->valid($_POST['periode'], 'xss'),
 				'user_id_pembuat' => $_SESSION['iduser'],
@@ -402,188 +388,7 @@ class jadwal extends PoCore
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-3 label-inline">Tes<span class="text-danger">*</span></label>
-                            <div class="col-md-2">
-                                <select name="harites" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											for ($hari = 1; $hari <= 31; $hari++) {
-												if ($hari < 10) {
-													$hari = "0" . $hari;
-												}
-												echo "<option value='$hari'>$hari</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="bulantes" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											for ($bulan = 1; $bulan <= 12; $bulan++) {
-												if ($bulan < 10) {
-													$bulan = "0" . $bulan;
-												}
-												echo "<option value='$bulan'>$bulan</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="tahuntes" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											$tahun = date('Y') + 1;
-											$tahun2 = date('Y') - 2;
-											for ($tahun; $tahun2 < $tahun; $tahun--) {
-												echo "<option value='$tahun'>$tahun</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-3 label-inline">Wawancara <span class="text-danger">*</span></label>
-                            <div class="col-md-2">
-                                <select name="hariwawancara" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											for ($hari = 1; $hari <= 31; $hari++) {
-												if ($hari < 10) {
-													$hari = "0" . $hari;
-												}
-												echo "<option value='$hari'>$hari</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="bulanwawancara" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											for ($bulan = 1; $bulan <= 12; $bulan++) {
-												if ($bulan < 10) {
-													$bulan = "0" . $bulan;
-												}
-												echo "<option value='$bulan'>$bulan</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="tahunwawancara" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											$tahun = date('Y') + 1;
-											$tahun2 = date('Y') - 2;
-											for ($tahun; $tahun2 < $tahun; $tahun--) {
-												echo "<option value='$tahun'>$tahun</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-3 label-inline">Pengumuman Seleksi <span
-                                    class="text-danger">*</span></label>
-                            <div class="col-md-2">
-                                <select name="haripengumuman" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											for ($hari = 1; $hari <= 31; $hari++) {
-												if ($hari < 10) {
-													$hari = "0" . $hari;
-												}
-												echo "<option value='$hari'>$hari</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="bulanpengumuman" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											for ($bulan = 1; $bulan <= 12; $bulan++) {
-												if ($bulan < 10) {
-													$bulan = "0" . $bulan;
-												}
-												echo "<option value='$bulan'>$bulan</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="tahunpengumuman" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											$tahun = date('Y') + 1;
-											$tahun2 = date('Y') - 2;
-											for ($tahun; $tahun2 < $tahun; $tahun--) {
-												echo "<option value='$tahun'>$tahun</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-3 label-inline">Pembekalan MBKM <span
-                                    class="text-danger">*</span></label>
-                            <div class="col-md-2">
-                                <select name="haripembekalan" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											for ($hari = 1; $hari <= 31; $hari++) {
-												if ($hari < 10) {
-													$hari = "0" . $hari;
-												}
-												echo "<option value='$hari'>$hari</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="bulanpembekalan" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											for ($bulan = 1; $bulan <= 12; $bulan++) {
-												if ($bulan < 10) {
-													$bulan = "0" . $bulan;
-												}
-												echo "<option value='$bulan'>$bulan</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="tahunpembekalan" class="form-control" required>
-                                    <?php
-											echo "<option value='' hidden=''>Pilih</option>";
-											$tahun = date('Y') + 1;
-											$tahun2 = date('Y') - 2;
-											for ($tahun; $tahun2 < $tahun; $tahun--) {
-												echo "<option value='$tahun'>$tahun</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
                 <div class="col-md-12">
                     <?= $this->pohtml->formAction(); ?>
@@ -614,10 +419,6 @@ class jadwal extends PoCore
 				'mbkm_jadwal_gelombang' => $this->postring->valid($_POST['gelombang'], 'sql'),
 				'mbkm_jadwal_awal' => $_POST['tahunawaldaftar'] . '-' . $_POST['bulanawaldaftar'] . '-' . $_POST['hariawaldaftar'],
 				'mbkm_jadwal_akhir' => $_POST['tahunakhirdaftar'] . '-' . $_POST['bulanakhirdaftar'] . '-' . $_POST['hariakhirdaftar'],
-				'mbkm_jadwal_pengumuman' => $_POST['tahunpengumuman'] . '-' . $_POST['bulanpengumuman'] . '-' . $_POST['haripengumuman'],
-				'mbkm_jadwal_tes_tulis' => $_POST['tahuntes'] . '-' . $_POST['bulantes'] . '-' . $_POST['harites'],
-				'mbkm_jadwal_tes_wawancara' => $_POST['tahunwawancara'] . '-' . $_POST['bulanwawancara'] . '-' . $_POST['hariwawancara'],
-				'mbkm_jadwal_pembekalan' => $_POST['tahunpembekalan'] . '-' . $_POST['bulanpembekalan'] . '-' . $_POST['haripembekalan'],
 				'mbkm_jadwal_tahun' => $this->postring->valid($_POST['tahun'], 'xss'),
 				'mbkm_jadwal_periode' => $this->postring->valid($_POST['periode'], 'xss'),
 				'mbkm_jadwal_aktif' => $_POST['active'],
@@ -814,249 +615,20 @@ class jadwal extends PoCore
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <?php
-									if (empty($current_jadwal['mbkm_jadwal_tes_tulis'])) {
-										$optionharites  = "<option value='' hidden=''>Pilih</option>";
-										$optionbulantes = "<option value='' hidden=''>Pilih</option>";
-										$optiontahuntes = "<option value='' hidden=''>Pilih</option>";
-									} else {
-										$pisahtanggaltes = explode('-', $current_jadwal['mbkm_jadwal_tes_tulis']);
-										$optionharites  = "<option value='$pisahtanggaltes[2]' hidden=''>$pisahtanggaltes[2]</option>";
-										$optionbulantes = "<option value='$pisahtanggaltes[1]' hidden=''>$pisahtanggaltes[1]</option>";
-										$optiontahuntes = "<option value='$pisahtanggaltes[0]' hidden=''>$pisahtanggaltes[0]</option>";
-									}
-									?>
-                            <label class="col-md-3 label-inline">Tes<span class="text-danger">*</span></label>
-                            <div class="col-md-2">
-                                <select name="harites" class="form-control" required>
-                                    <?php
-											echo "<option value='$optionharites' hidden=''>$optionharites</option>";
-											for ($hari = 1; $hari <= 31; $hari++) {
-												if ($hari < 10) {
-													$hari = "0" . $hari;
-												}
-												echo "<option value='$hari'>$hari</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="bulantes" class="form-control" required>
-                                    <?php
-											echo "<option value='$optionbulantes' hidden=''>$optionbulantes</option>";
-											for ($bulan = 1; $bulan <= 12; $bulan++) {
-												if ($bulan < 10) {
-													$bulan = "0" . $bulan;
-												}
-												echo "<option value='$bulan'>$bulan</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="tahuntes" class="form-control" required>
-                                    <?php
-											echo "<option value='$optiontahuntes' hidden=''>$optiontahuntes</option>";
-											$tahun = date('Y') + 1;
-											$tahun2 = date('Y') - 2;
-											for ($tahun; $tahun2 < $tahun; $tahun--) {
-												echo "<option value='$tahun'>$tahun</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <?php
-									if (empty($current_jadwal['mbkm_jadwal_tes_wawancara'])) {
-										$optionhariwawancara  = "<option value='' hidden=''>Pilih</option>";
-										$optionbulanwawancara = "<option value='' hidden=''>Pilih</option>";
-										$optiontahunwawancara = "<option value='' hidden=''>Pilih</option>";
-									} else {
-										$pisahtanggalwawancara = explode('-', $current_jadwal['mbkm_jadwal_tes_wawancara']);
-										$optionhariwawancara  = "<option value='$pisahtanggalwawancara[2]' hidden=''>$pisahtanggalwawancara[2]</option>";
-										$optionbulanwawancara = "<option value='$pisahtanggalwawancara[1]' hidden=''>$pisahtanggalwawancara[1]</option>";
-										$optiontahunwawancara = "<option value='$pisahtanggalwawancara[0]' hidden=''>$pisahtanggalwawancara[0]</option>";
-									}
-									?>
-                            <label class="col-md-3 label-inline">Wawancara <span class="text-danger">*</span></label>
-                            <div class="col-md-2">
-                                <select name="hariwawancara" class="form-control" required>
-                                    <?php
-											echo "<option value='$optionhariwawancara' hidden=''>$optionhariwawancara</option>";
-											for ($hari = 1; $hari <= 31; $hari++) {
-												if ($hari < 10) {
-													$hari = "0" . $hari;
-												}
-												echo "<option value='$hari'>$hari</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="bulanwawancara" class="form-control" required>
-                                    <?php
-											echo "<option value='$optionbulanwawancara' hidden=''>$optionbulanwawancara</option>";
-											for ($bulan = 1; $bulan <= 12; $bulan++) {
-												if ($bulan < 10) {
-													$bulan = "0" . $bulan;
-												}
-												echo "<option value='$bulan'>$bulan</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="tahunwawancara" class="form-control" required>
-                                    <?php
-											echo "<option value='$optiontahunwawancara' hidden=''>$optiontahunwawancara</option>";
-											$tahun = date('Y') + 1;
-											$tahun2 = date('Y') - 2;
-											for ($tahun; $tahun2 < $tahun; $tahun--) {
-												echo "<option value='$tahun'>$tahun</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <?php
-									if (empty($current_jadwal['mbkm_jadwal_pengumuman'])) {
-										$optionharipengumuman  = "<option value='' hidden=''>Pilih</option>";
-										$optionbulanpengumuman = "<option value='' hidden=''>Pilih</option>";
-										$optiontahunpengumuman = "<option value='' hidden=''>Pilih</option>";
-									} else {
-										$pisahtanggalpengumuman = explode('-', $current_jadwal['mbkm_jadwal_pengumuman']);
-										$optionharipengumuman  = "<option value='$pisahtanggalpengumuman[2]' hidden=''>$pisahtanggalpengumuman[2]</option>";
-										$optionbulanpengumuman = "<option value='$pisahtanggalpengumuman[1]' hidden=''>$pisahtanggalpengumuman[1]</option>";
-										$optiontahunpengumuman = "<option value='$pisahtanggalpengumuman[0]' hidden=''>$pisahtanggalpengumuman[0]</option>";
-									}
-									?>
-                            <label class="col-md-3 label-inline">Pengumuman Seleksi <span
-                                    class="text-danger">*</span></label>
-                            <div class="col-md-2">
-                                <select name="haripengumuman" class="form-control" required>
-                                    <?php
-											echo "<option value='$optionharipengumuman' hidden=''>$optionharipengumuman</option>";
-											for ($hari = 1; $hari <= 31; $hari++) {
-												if ($hari < 10) {
-													$hari = "0" . $hari;
-												}
-												echo "<option value='$hari'>$hari</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="bulanpengumuman" class="form-control" required>
-                                    <?php
-											echo "<option value='$optionbulanpengumuman' hidden=''>$optionbulanpengumuman</option>";
-											for ($bulan = 1; $bulan <= 12; $bulan++) {
-												if ($bulan < 10) {
-													$bulan = "0" . $bulan;
-												}
-												echo "<option value='$bulan'>$bulan</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="tahunpengumuman" class="form-control" required>
-                                    <?php
-											echo "<option value='$optiontahunpengumuman' hidden=''>$optiontahunpengumuman</option>";
-											$tahun = date('Y') + 1;
-											$tahun2 = date('Y') - 2;
-											for ($tahun; $tahun2 < $tahun; $tahun--) {
-												echo "<option value='$tahun'>$tahun</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <?php
-									if (empty($current_jadwal['mbkm_jadwal_pembekalan'])) {
-										$optionhari  = "<option value='' hidden=''>Pilih</option>";
-										$optionbulan = "<option value='' hidden=''>Pilih</option>";
-										$optiontahun = "<option value='' hidden=''>Pilih</option>";
-									} else {
-										$pisahtanggal = explode('-', $current_jadwal['mbkm_jadwal_pembekalan']);
-										$optionhari  = "<option value='$pisahtanggal[2]' hidden=''>$pisahtanggal[2]</option>";
-										$optionbulan = "<option value='$pisahtanggal[1]' hidden=''>$pisahtanggal[1]</option>";
-										$optiontahun = "<option value='$pisahtanggal[0]' hidden=''>$pisahtanggal[0]</option>";
-									}
-									?>
-                            <label class="col-md-3 label-inline">Pembekalan MBKM <span
-                                    class="text-danger">*</span></label>
-                            <div class="col-md-2">
-                                <select name="haripembekalan" class="form-control" required>
-                                    <?php
-											echo "<option value='$optionhari' hidden=''>$optionhari</option>";
-											for ($hari = 1; $hari <= 31; $hari++) {
-												if ($hari < 10) {
-													$hari = "0" . $hari;
-												}
-												echo "<option value='$hari'>$hari</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="bulanpembekalan" class="form-control" required>
-                                    <?php
-											echo "<option value='$optionbulan' hidden=''>$optionbulan</option>";
-											for ($bulan = 1; $bulan <= 12; $bulan++) {
-												if ($bulan < 10) {
-													$bulan = "0" . $bulan;
-												}
-												echo "<option value='$bulan'>$bulan</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="tahunpembekalan" class="form-control" required>
-                                    <?php
-											echo "<option value='$optiontahun' hidden=''>$optiontahun</option>";
-											$tahun = date('Y') + 1;
-											$tahun2 = date('Y') - 2;
-											for ($tahun; $tahun2 < $tahun; $tahun--) {
-												echo "<option value='$tahun'>$tahun</option>";
-											}
-											?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-md-12">
                     <?php
 							if ($current_jadwal['mbkm_jadwal_aktif'] == 'N') {
 								$radioitem = array(
-									array('name' => 'active', 'id' => 'active', 'value' => 'Y', 'options' => '', 'title' => 'Y'),
-									array('name' => 'active', 'id' => 'active', 'value' => 'N', 'options' => 'checked', 'title' => 'N')
+									array('name' => 'active', 'id' => 'active', 'value' => 'Y', 'options' => '', 'title' => 'YA'),
+									array('name' => 'active', 'id' => 'active', 'value' => 'N', 'options' => 'checked', 'title' => 'TIDAK')
 								);
 								echo $this->pohtml->inputRadio(array('label' =>
 								'Jadwal Aktif', 'mandatory' => true), $radioitem, $inline = true);
 							} else {
 								$radioitem = array(
-									array('name' => 'active', 'id' => 'active', 'value' => 'Y', 'options' => 'checked', 'title' => 'Y'),
-									array('name' => 'active', 'id' => 'active', 'value' => 'N', 'options' => '', 'title' => 'N')
+									array('name' => 'active', 'id' => 'active', 'value' => 'Y', 'options' => 'checked', 'title' => 'YA'),
+									array('name' => 'active', 'id' => 'active', 'value' => 'N', 'options' => '', 'title' => 'TIDAK')
 								);
 								echo $this->pohtml->inputRadio(array('label' => "Jadwal Aktif", 'mandatory' => true), $radioitem, $inline = true);
 							}

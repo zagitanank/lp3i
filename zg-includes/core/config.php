@@ -10,11 +10,11 @@ define('CONF_VER', $site['ver']);
 define('CONF_BUILD', $site['build']);
 define('CONF_RELEASE', $site['release']);
 
-$site['url'] = "http://localhost/polinas/";
+$site['url'] = "http://localhost/lp3i/";
 $site['adm'] = "admin";
 $site['con'] = "zg-content";
 $site['inc'] = "zg-includes";
-$site['siaka'] = "https://siska.unifa.ac.id/upload/";
+$site['siaka'] = "";
 
 define('WEB_URL', $site['url']);
 define('DIR_ADM', $site['adm']);
@@ -28,7 +28,7 @@ $db['sock'] = "";
 $db['port'] = "";
 $db['user'] = "root";
 $db['passwd'] = "";
-$db['db'] = "polinas";
+$db['db'] = "lp3i";
 
 define('DATABASE_HOST', $db['host']);
 define('DATABASE_DRIVER', $db['driver']);

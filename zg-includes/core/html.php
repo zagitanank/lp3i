@@ -701,6 +701,37 @@ class PoHtml
 		return ($dialogdel);
 	}
 
+
+	public function dialogDeleteKRS($component, $act = null)
+	{
+		$dialogdel = "<div id=\"alertdelkrs\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n";
+		$dialogdel .= "<div class=\"modal-dialog\">\n";
+		$dialogdel .= "<div class=\"modal-content\">\n";
+		if ($act == null) {
+			$dialogdel .= "<form method=\"post\" action=\"route.php?mod={$component}&act=deletekrs\" autocomplete=\"off\">\n";
+		} else {
+			$dialogdel .= "<form method=\"post\" action=\"route.php?mod={$component}&act={$act}\" autocomplete=\"off\">\n";
+		}
+		$dialogdel .= "<div class=\"modal-header\">\n";
+		$dialogdel .= "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n";
+		$dialogdel .= "<h4 id=\"modal-title\"><i class=\"fa fa-exclamation-triangle text-danger\"></i>Konfirmasi Pembatalan</h4>\n";
+		$dialogdel .= "</div>\n";
+		$dialogdel .= "<div class=\"modal-body\">\n";
+		$dialogdel .= "<input type=\"hidden\" id=\"delidkrs\" name=\"id\" />\n";
+		$dialogdel .= "<input type=\"hidden\" id=\"periodekrs\" name=\"periode\" />\n";
+		$dialogdel .= "Apakah Anda yakin ingin menginput ulang KRS MKBKM ?\n";
+		$dialogdel .= "</div>\n";
+		$dialogdel .= "<div class=\"modal-footer\">\n";
+		$dialogdel .= "<button type=\"submit\" class=\"btn btn-sm btn-danger\"><i class=\"fa fa-refresh\"></i> {$GLOBALS['_']['dialogdel_3']}</button>\n";
+		$dialogdel .= "<button type=\"button\" class=\"btn btn-sm btn-default\" data-dismiss=\"modal\" aria-hidden=\"true\"><i class=\"fa fa-sign-out\"></i> {$GLOBALS['_']['dialogdel_4']}</button>\n";
+		$dialogdel .= "</div>\n";
+		$dialogdel .= "</form>\n";
+		$dialogdel .= "</div>\n";
+		$dialogdel .= "</div>\n";
+		$dialogdel .= "</div>\n";
+		return ($dialogdel);
+	}
+
 	/**
 	 * Fungsi ini digunakan untuk membuat dialog aktifasi pada konten admin
 	 * Setiap parameter harus di tulis saat pemanggilan function
@@ -920,17 +951,17 @@ class PoHtml
 	public function error()
 	{
 ?>
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h1 class="page-header">Page Not Found <small class="text-danger">Error 404</small></h1>
-				<p>
-					The page you requested could not be found, either contact your webmaster or try again.<br />
-					Use your browsers <b>Back</b> button to navigate to the page you have previously<br />
-					come from <b>or you could just press this neat little button :</b>
-				</p>
-				<a href="?mod=home&act=index" class="btn btn-sm btn-primary"><i class="fa fa-home"></i> Take Me Home</a>
-			</div>
-		</div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Page Not Found <small class="text-danger">Error 404</small></h1>
+        <p>
+            The page you requested could not be found, either contact your webmaster or try again.<br />
+            Use your browsers <b>Back</b> button to navigate to the page you have previously<br />
+            come from <b>or you could just press this neat little button :</b>
+        </p>
+        <a href="?mod=home&act=index" class="btn btn-sm btn-primary"><i class="fa fa-home"></i> Take Me Home</a>
+    </div>
+</div>
 <?php
 	}
 
