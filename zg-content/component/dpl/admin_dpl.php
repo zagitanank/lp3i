@@ -62,15 +62,15 @@ class dpl extends PoCore
             echo $this->pohtml->error();
             exit;
         } ?>
-        <div class="block-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <?= $this->pohtml->headTitle('Kelas DPL', ''); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <?php
+<div class="block-content">
+    <div class="row">
+        <div class="col-md-12">
+            <?= $this->pohtml->headTitle('Kelas DPL', ''); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?php
                     $columns = array(
                         array('title' => 'Kode Dosen', 'options' => ''),
                         array('title' => 'BKP', 'options' => ''),
@@ -79,13 +79,13 @@ class dpl extends PoCore
                         array('title' => 'Kelas DPL', 'options' => 'class="no-sort" style="width:150px;"')
                     );
                     ?>
-                    <?= $this->pohtml->createTable(array('id' => 'table-dpl', 'class' => 'table table-striped table-bordered'), $columns, $tfoot = false); ?>
+            <?= $this->pohtml->createTable(array('id' => 'table-dpl', 'class' => 'table table-striped table-bordered'), $columns, $tfoot = false); ?>
 
-                </div>
-            </div>
         </div>
-        <?= $this->pohtml->dialogAktifasi('dpl'); ?>
-    <?php
+    </div>
+</div>
+<?= $this->pohtml->dialogAktifasi('dpl'); ?>
+<?php
     }
 
     /**
@@ -256,55 +256,60 @@ class dpl extends PoCore
             exit;
         }
     ?>
-        <div class="block-content">
+<div class="block-content">
+    <div class="row">
+        <div class="col-md-12">
+            <?= $this->pohtml->headTitle('Detail Peserta'); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert-info" style="padding: 20px; margin-bottom: 20px;">Tanda <span class="text-danger">*</span>
+                berarti harus diisi!</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?= $this->pohtml->formStart(array('method' => 'post', 'action' => 'route.php?mod=dpl&act=edit&id=' . $current_user['id_session'], 'enctype' => true, 'autocomplete' => 'off')); ?>
+            <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_user['id_session'])); ?>
             <div class="row">
                 <div class="col-md-12">
-                    <?= $this->pohtml->headTitle('Detail Peserta'); ?>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="username" class="col-md-3 label-inline">Kode Registrasi <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-2">
+                                <input type="text" name="username" id="username" class="form-control "
+                                    value="<?= $current_user['kode_registrasi']; ?>" disabled="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="alert-info" style="padding: 20px; margin-bottom: 20px;">Tanda <span class="text-danger">*</span>
-                        berarti harus diisi!</div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="nama_lengkap" class="col-md-3 label-inline">Nama Peserta <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control "
+                                    value="<?= $current_user['nama_lengkap_peserta']; ?>" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <?= $this->pohtml->formStart(array('method' => 'post', 'action' => 'route.php?mod=dpl&act=edit&id=' . $current_user['id_session'], 'enctype' => true, 'autocomplete' => 'off')); ?>
-                    <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_user['id_session'])); ?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="username" class="col-md-3 label-inline">Kode Registrasi <span class="text-danger">*</span></label>
-                                    <div class="col-md-2">
-                                        <input type="text" name="username" id="username" class="form-control " value="<?= $current_user['kode_registrasi']; ?>" disabled="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="nama_lengkap" class="col-md-3 label-inline">Nama Peserta <span class="text-danger">*</span></label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control " value="<?= $current_user['nama_lengkap_peserta']; ?>" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="gelombang" class="col-md-3 label-inline">Gelombang Pendaftaran <span class="text-danger">*</span></label>
-                                    <div class="col-md-2">
-                                        <select class="form-control " id="gelombang" name="gelombang" required>
-                                            <?php
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="gelombang" class="col-md-3 label-inline">Gelombang Pendaftaran <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-2">
+                                <select class="form-control " id="gelombang" name="gelombang" required>
+                                    <?php
                                             $current_gelombang = $this->podb->from('jadwal')
                                                 ->where('jadwal_gelombang', $current_user['gelombang_daftar'])
                                                 ->limit(1)
@@ -322,21 +327,22 @@ class dpl extends PoCore
                                                 echo '<option value="' . $glb['jadwal_gelombang'] . '">' . $glb['jadwal_gelombang'] . '</option>';
                                             }
                                             ?>
-                                        </select>
-                                    </div>
-                                </div>
+                                </select>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="jenjang" class="col-md-3 label-inline">Jenjang Pendidikan Tujuan <span class="text-danger">*</span></label>
-                                    <div class="col-md-3">
-                                        <select class="form-control select2" id="jenjang" name="jenjang" required>
-                                            <?php
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="jenjang" class="col-md-3 label-inline">Jenjang Pendidikan Tujuan <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-3">
+                                <select class="form-control select2" id="jenjang" name="jenjang" required>
+                                    <?php
                                             $current_jenjang = $this->podb->from('jenjang_studi')
                                                 ->where('jenjang_studi_id', $current_user['jenjang_studi_id'])
                                                 ->limit(1)
@@ -353,20 +359,21 @@ class dpl extends PoCore
                                                 echo '<option value="' . $jen['jenjang_studi_id'] . '">' . strtoupper($jen['jenjang_studi_singkatan']) . ' (' . strtoupper($jen['jenjang_studi_nama']) . ')</option>';
                                             }
                                             ?>
-                                        </select>
-                                    </div>
-                                </div>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="proditujuan" class="col-md-3 label-inline">Prodi Tujuan <span class="text-danger">*</span></label>
-                                    <div class="col-md-7">
-                                        <select class="form-control select2" id="proditujuan" name="proditujuan" required>
-                                            <?php
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="proditujuan" class="col-md-3 label-inline">Prodi Tujuan <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <select class="form-control select2" id="proditujuan" name="proditujuan" required>
+                                    <?php
                                             $current_prodi = $this->podb->from('program_studi')
                                                 ->where('prodiKode', $current_user['pilihan_pertama'])
                                                 ->limit(1)
@@ -377,22 +384,23 @@ class dpl extends PoCore
                                                 echo '<option value="" hidden>Pilih</option>';
                                             }
                                             ?>
-                                        </select>
-                                    </div>
-                                </div>
+                                </select>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div id="menusekolah" style="display: none;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="kotasekolah" class="col-md-3 label-inline">Kota/Kab SMTA<span class="text-danger">*</span></label>
-                                        <div class="col-md-5">
-                                            <select class="form-control select2" id="kotasekolah" name="kotasekolah" required>
-                                                <?php
+            <div id="menusekolah" style="display: none;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="kotasekolah" class="col-md-3 label-inline">Kota/Kab SMTA<span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-5">
+                                    <select class="form-control select2" id="kotasekolah" name="kotasekolah" required>
+                                        <?php
                                                 $current_kotasekolah = $this->podb->from('wilayah_data')
                                                     ->where('id_wil', $current_user['kota_sekolah_peserta'])
                                                     ->limit(1)
@@ -410,20 +418,21 @@ class dpl extends PoCore
                                                     echo '<option value="' . $kabse['id_wil'] . '">' . $kabse['nm_wil'] . '</option>';
                                                 }
                                                 ?>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="sekolahasal" class="col-md-3 label-inline">Nama SMTA<span class="text-danger">*</span></label>
-                                        <div class="col-md-5">
-                                            <select class="form-control select2" id="sekolahasal" name="sekolahasal" required>
-                                                <?php
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="sekolahasal" class="col-md-3 label-inline">Nama SMTA<span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-5">
+                                    <select class="form-control select2" id="sekolahasal" name="sekolahasal" required>
+                                        <?php
                                                 $current_smta = $this->podb->from('smta')
                                                     ->where('smtaKode', $current_user['asal_sekolah_peserta'])
                                                     ->limit(1)
@@ -434,47 +443,50 @@ class dpl extends PoCore
                                                     echo '<option value="" hidden>Pilih</option>';
                                                 }
                                                 ?>
-                                            </select>
-                                            <span class="help-block"><small>Untuk melihat sekolah asal, harus memilih Kota/Kab
-                                                    SMTA dahulu.</small></span>
+                                    </select>
+                                    <span class="help-block"><small>Untuk melihat sekolah asal, harus memilih Kota/Kab
+                                            SMTA dahulu.</small></span>
 
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div id="menukampus" style="display: none;">
-                        <input type="hidden" id="iduniv" name="iduniv" />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="universitas" class="col-md-3 label-inline">Perguruan Tinggi Asal <span class="text-danger">*</span></label>
-                                        <div class="col-md-6">
-                                            <?php
+            <div id="menukampus" style="display: none;">
+                <input type="hidden" id="iduniv" name="iduniv" />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="universitas" class="col-md-3 label-inline">Perguruan Tinggi Asal <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-6">
+                                    <?php
                                             $current_universitas = $this->podb->from('universitas')
                                                 ->where('kode_universitas', $current_user['kode_universitas'])
                                                 ->limit(1)
                                                 ->fetch();
                                             ?>
-                                            <input type="text" name="universitas" id="universitas" class="form-control " value="<?= strtoupper($current_universitas['nama_universitas']); ?>">
-                                        </div>
-                                    </div>
+                                    <input type="text" name="universitas" id="universitas" class="form-control "
+                                        value="<?= strtoupper($current_universitas['nama_universitas']); ?>">
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="jalur" class="col-md-3 label-inline">Jalur Pendaftaran <span class="text-danger">*</span></label>
-                                    <div class="col-md-3">
-                                        <select class="form-control " id="jalur" name="jalur" required>
-                                            <?php
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="jalur" class="col-md-3 label-inline">Jalur Pendaftaran <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-3">
+                                <select class="form-control " id="jalur" name="jalur" required>
+                                    <?php
                                             $current_jalur = $this->podb->from('jalur_pendaftaran')
                                                 ->where('jalur_pendaftaran_id', $current_user['jalur_pendaftaran'])
                                                 ->limit(1)
@@ -492,59 +504,65 @@ class dpl extends PoCore
                                                 echo '<option value="' . $jlr['jalur_pendaftaran_id'] . '">' . strtoupper($jlr['jalur_pendaftaran_nama']) . '</option>';
                                             }
                                             ?>
-                                        </select>
-                                    </div>
-                                </div>
+                                </select>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="email" class="col-md-3 label-inline">Email Peserta <span class="text-danger">*</span></label>
-                                    <div class="col-md-4">
-                                        <input type="text" name="email" id="email" class="form-control " value="<?= strtolower($current_user['email_peserta']); ?>" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="no_telp" class="col-md-3 label-inline">No. Ponsel Peserta <span class="text-danger">*</span></label>
-                                    <div class="col-md-3">
-                                        <input type="text" name="no_telp" id="no_telp" class="form-control" value="<?= $current_user['telp_peserta']; ?>" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="no_telp" class="col-md-3 label-inline">No. Whatsapp <span class="text-danger">*</span></label>
-                                    <div class="col-md-3">
-                                        <input type="text" name="no_wa" id="no_wa" class="form-control" value="<?= $current_user['no_wa_peserta']; ?>" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <?= $this->pohtml->formAction(); ?>
-                        </div>
-                    </div>
-                    <?= $this->pohtml->formEnd(); ?>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="email" class="col-md-3 label-inline">Email Peserta <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text" name="email" id="email" class="form-control "
+                                    value="<?= strtolower($current_user['email_peserta']); ?>" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="no_telp" class="col-md-3 label-inline">No. Ponsel Peserta <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-3">
+                                <input type="text" name="no_telp" id="no_telp" class="form-control"
+                                    value="<?= $current_user['telp_peserta']; ?>" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="no_telp" class="col-md-3 label-inline">No. Whatsapp <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-3">
+                                <input type="text" name="no_wa" id="no_wa" class="form-control"
+                                    value="<?= $current_user['no_wa_peserta']; ?>" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $this->pohtml->formAction(); ?>
+                </div>
+            </div>
+            <?= $this->pohtml->formEnd(); ?>
         </div>
-    <?php
+    </div>
+</div>
+<?php
 
     }
 
@@ -586,48 +604,50 @@ class dpl extends PoCore
 
     ?>
 
-        <div class="block-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <?= $this->pohtml->headTitle('Ganti Password'); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <form role="form" method="post" id="passwordForm" action="route.php?mod=dpl&act=gantipassword" autocomplete="off">
-                        <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_peserta['id_peserta'])); ?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="kode" class="col-md-3 label-inline">Password Baru </label>
-                                        <div class="col-md-3">
-                                            <input type="password" name="newpassword" id="newpassword" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="nama" class="col-md-3 label-inline">Ulangi Password Baru </label>
-                                        <div class="col-md-3">
-                                            <input type="password" class="form-control" name="renewpassword" id="renewpassword" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-md-12">
-                            <?= $this->pohtml->formAction(); ?>
-                        </div>
-                        <?= $this->pohtml->formEnd(); ?>
-                </div>
-            </div>
+<div class="block-content">
+    <div class="row">
+        <div class="col-md-12">
+            <?= $this->pohtml->headTitle('Ganti Password'); ?>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" method="post" id="passwordForm" action="route.php?mod=dpl&act=gantipassword"
+                autocomplete="off">
+                <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_peserta['id_peserta'])); ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="kode" class="col-md-3 label-inline">Password Baru </label>
+                                <div class="col-md-3">
+                                    <input type="password" name="newpassword" id="newpassword" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="nama" class="col-md-3 label-inline">Ulangi Password Baru </label>
+                                <div class="col-md-3">
+                                    <input type="password" class="form-control" name="renewpassword"
+                                        id="renewpassword" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <?php
+                </div>
+                <div class="col-md-12">
+                    <?= $this->pohtml->formAction(); ?>
+                </div>
+                <?= $this->pohtml->formEnd(); ?>
+        </div>
+    </div>
+</div>
+
+<?php
 
     }
     /**
@@ -681,87 +701,97 @@ class dpl extends PoCore
 
 
     ?>
-        <div class="block-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <?= $this->pohtml->headTitle('Nilai Raport'); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <form role="form" method="post" action="route.php?mod=dpl&act=raport" autocomplete="off">
-                        <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_peserta['id_peserta'])); ?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="kode" class="col-md-3 label-inline">No. Peserta </label>
-                                        <div class="col-md-3">
-                                            <input type="text" name="kode" value="<?= $current_peserta['no_peserta']; ?>" class="form-control" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="nama" class="col-md-3 label-inline">Nama Lengkap </label>
-                                        <div class="col-md-9">
-                                            <input type="text" value="<?= ucwords($current_peserta['nama_lengkap_peserta']); ?>" class="form-control" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="jalur" class="col-md-3 label-inline">Jalur Pendaftaran </label>
-                                        <div class="col-md-2">
-                                            <input type="text" value="<?= strtoupper($current_jalur['jalur_pendaftaran_nama']); ?>" class="form-control" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="jalur" class="col-md-3 label-inline">Nilai Matematika <span class="text-danger">*</span></label>
-                                        <div class="col-md-2">
-                                            <input type="number" value="<?= $current_raport['raport_matematika']; ?>" name="matematika" class="form-control" required="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="jalur" class="col-md-3 label-inline">Nilai Bahasa Indonesia <span class="text-danger">*</span></label>
-                                        <div class="col-md-2">
-                                            <input type="number" value="<?= $current_raport['raport_indonesia']; ?>" name="indonesia" class="form-control" required="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="jalur" class="col-md-3 label-inline">Nilai Bahasa Inggris <span class="text-danger">*</span></label>
-                                        <div class="col-md-2">
-                                            <input type="number" value="<?= $current_raport['raport_inggris']; ?>" name="inggris" class="form-control" required="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-md-12">
-                            <?= $this->pohtml->formAction(); ?>
-                        </div>
-                        <?= $this->pohtml->formEnd(); ?>
-                </div>
-            </div>
+<div class="block-content">
+    <div class="row">
+        <div class="col-md-12">
+            <?= $this->pohtml->headTitle('Nilai Raport'); ?>
         </div>
-    <?php
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" method="post" action="route.php?mod=dpl&act=raport" autocomplete="off">
+                <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_peserta['id_peserta'])); ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="kode" class="col-md-3 label-inline">No. Peserta </label>
+                                <div class="col-md-3">
+                                    <input type="text" name="kode" value="<?= $current_peserta['no_peserta']; ?>"
+                                        class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="nama" class="col-md-3 label-inline">Nama Lengkap </label>
+                                <div class="col-md-9">
+                                    <input type="text" value="<?= ucwords($current_peserta['nama_lengkap_peserta']); ?>"
+                                        class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="jalur" class="col-md-3 label-inline">Jalur Pendaftaran </label>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                        value="<?= strtoupper($current_jalur['jalur_pendaftaran_nama']); ?>"
+                                        class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="jalur" class="col-md-3 label-inline">Nilai Matematika <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-2">
+                                    <input type="number" value="<?= $current_raport['raport_matematika']; ?>"
+                                        name="matematika" class="form-control" required="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="jalur" class="col-md-3 label-inline">Nilai Bahasa Indonesia <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-2">
+                                    <input type="number" value="<?= $current_raport['raport_indonesia']; ?>"
+                                        name="indonesia" class="form-control" required="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="jalur" class="col-md-3 label-inline">Nilai Bahasa Inggris <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-2">
+                                    <input type="number" value="<?= $current_raport['raport_inggris']; ?>"
+                                        name="inggris" class="form-control" required="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <?= $this->pohtml->formAction(); ?>
+                </div>
+                <?= $this->pohtml->formEnd(); ?>
+        </div>
+    </div>
+</div>
+<?php
 
     }
 
@@ -845,96 +875,101 @@ class dpl extends PoCore
             exit;
         }
     ?>
-        <div class="block-content">
+<div class="block-content">
+    <div class="row">
+        <div class="col-md-12">
+            <?= $this->pohtml->headTitle('Nilai Tes Peserta'); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?= $this->pohtml->formStart(array('method' => 'post', 'action' => 'route.php?mod=dpl&act=nilai&id=' . $current_user['id_session'], 'enctype' => true, 'autocomplete' => 'off')); ?>
+            <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_user['id_session'])); ?>
             <div class="row">
                 <div class="col-md-12">
-                    <?= $this->pohtml->headTitle('Nilai Tes Peserta'); ?>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="username" class="col-md-3 label-inline">No. Peserta</label>
+                            <div class="col-md-2">
+                                <input type="text" name="username" id="username" class="form-control "
+                                    value="<?= $current_user['kode_registrasi']; ?>" disabled="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <?= $this->pohtml->formStart(array('method' => 'post', 'action' => 'route.php?mod=dpl&act=nilai&id=' . $current_user['id_session'], 'enctype' => true, 'autocomplete' => 'off')); ?>
-                    <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_user['id_session'])); ?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="username" class="col-md-3 label-inline">No. Peserta</label>
-                                    <div class="col-md-2">
-                                        <input type="text" name="username" id="username" class="form-control " value="<?= $current_user['kode_registrasi']; ?>" disabled="">
-                                    </div>
-                                </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="nama_lengkap" class="col-md-3 label-inline">Nama Peserta</label>
+                            <div class="col-md-9">
+                                <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control "
+                                    value="<?= $current_user['nama_lengkap_peserta']; ?>" disabled>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="nama_lengkap" class="col-md-3 label-inline">Nama Peserta</label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control " value="<?= $current_user['nama_lengkap_peserta']; ?>" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
+                </div>
+            </div>
+            <?php
                     if ($current_user['jalur_pendaftaran'] == '4') {
                     ?>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="skor" class="col-md-3 label-inline">Skor UTBK</label>
-                                        <div class="col-md-2">
-                                            <input type="text" name="skor" id="skor" class="form-control " value="<?= $current_skor['skor_utbk']; ?>" maxlength="3" required="">
-                                            <span class="help-block"><small>Penulisan skor, dari angka 0 s/d 100.</small></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } elseif ($current_user['jalur_pendaftaran'] == '3') { ?>
-
-
-                    <?php } else { ?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="tpa" class="col-md-3 label-inline">Skor TPA</label>
-                                        <div class="col-md-2">
-                                            <input type="text" name="tpa" id="tpa" class="form-control " value="<?= $current_tpa['nilai']; ?>" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="wawancara" class="col-md-3 label-inline">Skor Wawancara </label>
-                                    <div class="col-md-2">
-                                        <input type="text" name="wawancara" id="wawancara" class="form-control " value="<?= $current_wawancara['nilai_wawancara']; ?>" disabled>
-                                    </div>
-                                </div>
+                            <label for="skor" class="col-md-3 label-inline">Skor UTBK</label>
+                            <div class="col-md-2">
+                                <input type="text" name="skor" id="skor" class="form-control "
+                                    value="<?= $current_skor['skor_utbk']; ?>" maxlength="3" required="">
+                                <span class="help-block"><small>Penulisan skor, dari angka 0 s/d 100.</small></span>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <?= $this->pohtml->formAction(); ?>
-                        </div>
-                    </div>
-                    <?= $this->pohtml->formEnd(); ?>
                 </div>
             </div>
+            <?php } elseif ($current_user['jalur_pendaftaran'] == '3') { ?>
+
+
+            <?php } else { ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="tpa" class="col-md-3 label-inline">Skor TPA</label>
+                            <div class="col-md-2">
+                                <input type="text" name="tpa" id="tpa" class="form-control "
+                                    value="<?= $current_tpa['nilai']; ?>" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="wawancara" class="col-md-3 label-inline">Skor Wawancara </label>
+                            <div class="col-md-2">
+                                <input type="text" name="wawancara" id="wawancara" class="form-control "
+                                    value="<?= $current_wawancara['nilai_wawancara']; ?>" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $this->pohtml->formAction(); ?>
+                </div>
+            </div>
+            <?= $this->pohtml->formEnd(); ?>
         </div>
-    <?php
+    </div>
+</div>
+<?php
 
     }
 
@@ -1467,74 +1502,80 @@ class dpl extends PoCore
     ?>
 
 
-        <div class="block-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <?= $this->pohtml->headTitle('Penentuan seleksi'); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <form role="form" method="post" action="route.php?mod=dpl&act=dpl" autocomplete="off">
-                        <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_peserta['id_peserta'])); ?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="kode" class="col-md-3 label-inline">No. Peserta </label>
-                                        <div class="col-md-4">
-                                            <input type="text" name="kode" value="<?= $current_peserta['no_peserta']; ?>" class="form-control" readonly />
-                                        </div>
-                                    </div>
+<div class="block-content">
+    <div class="row">
+        <div class="col-md-12">
+            <?= $this->pohtml->headTitle('Penentuan seleksi'); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" method="post" action="route.php?mod=dpl&act=dpl" autocomplete="off">
+                <?= $this->pohtml->inputHidden(array('name' => 'id', 'value' => $current_peserta['id_peserta'])); ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="kode" class="col-md-3 label-inline">No. Peserta </label>
+                                <div class="col-md-4">
+                                    <input type="text" name="kode" value="<?= $current_peserta['no_peserta']; ?>"
+                                        class="form-control" readonly />
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="nama" class="col-md-3 label-inline">Nama Lengkap </label>
-                                        <div class="col-md-9">
-                                            <input type="text" value="<?= ucwords($current_peserta['nama_lengkap_peserta']); ?>" class="form-control" readonly />
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="nama" class="col-md-3 label-inline">Nama Lengkap </label>
+                                <div class="col-md-9">
+                                    <input type="text" value="<?= ucwords($current_peserta['nama_lengkap_peserta']); ?>"
+                                        class="form-control" readonly />
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="jalur" class="col-md-3 label-inline">Jalur Pendaftaran </label>
-                                        <div class="col-md-5">
-                                            <input type="text" value="<?= strtoupper($current_jalur['jalur_pendaftaran_nama']); ?>" class="form-control" readonly />
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="jalur" class="col-md-3 label-inline">Jalur Pendaftaran </label>
+                                <div class="col-md-5">
+                                    <input type="text"
+                                        value="<?= strtoupper($current_jalur['jalur_pendaftaran_nama']); ?>"
+                                        class="form-control" readonly />
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="prodilulus" class="col-md-3 label-inline">Prodi Tujuan </label>
-                                        <div class="col-md-6">
-                                            <?php
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="prodilulus" class="col-md-3 label-inline">Prodi Tujuan </label>
+                                <div class="col-md-6">
+                                    <?php
                                             $pil_satu = $this->podb->from('program_studi')
                                                 ->where('prodiKode', $current_peserta['pilihan_pertama'])
                                                 ->limit(1)
                                                 ->fetch();
 
                                             ?>
-                                            <input type="hidden" name="prodilulus" value="<?= $current_peserta['pilihan_pertama']; ?>" />
-                                            <input type="text" value="<?= $pil_satu['prodiNamaResmi']; ?>" class="form-control" readonly />
-                                        </div>
-                                    </div>
+                                    <input type="hidden" name="prodilulus"
+                                        value="<?= $current_peserta['pilihan_pertama']; ?>" />
+                                    <input type="text" value="<?= $pil_satu['prodiNamaResmi']; ?>" class="form-control"
+                                        readonly />
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="statusseleksi" class="col-md-3 label-inline">Status Seleksi </label>
-                                        <div class="col-md-4">
-                                            <select class="form-control" id="statusseleksi" name="statusseleksi" required>
-                                                <?php
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="statusseleksi" class="col-md-3 label-inline">Status Seleksi </label>
+                                <div class="col-md-4">
+                                    <select class="form-control" id="statusseleksi" name="statusseleksi" required>
+                                        <?php
                                                 if (!empty($current_peserta['status_seleksi'])) {
                                                     $valueseleksi = $current_peserta['status_seleksi'];
                                                     $tampilseleksi = "Terpilih - " . $current_peserta['status_seleksi'];
@@ -1543,26 +1584,26 @@ class dpl extends PoCore
                                                     $tampilseleksi = 'Pilih';
                                                 }
                                                 ?>
-                                                <option value="<?= $valueseleksi; ?>" hidden=""><?= $tampilseleksi; ?></option>
-                                                <option value="Lulus">Lulus</option>
-                                                <option value="Cadangan">Cadangan</option>
-                                                <option value="Tidak Lulus">Tidak Lulus</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                        <option value="<?= $valueseleksi; ?>" hidden=""><?= $tampilseleksi; ?></option>
+                                        <option value="Lulus">Lulus</option>
+                                        <option value="Cadangan">Cadangan</option>
+                                        <option value="Tidak Lulus">Tidak Lulus</option>
+                                    </select>
                                 </div>
                             </div>
-
-
-
                         </div>
-                        <div class="col-md-12">
-                            <?= $this->pohtml->formAction(); ?>
-                        </div>
-                        <?= $this->pohtml->formEnd(); ?>
+                    </div>
+
+
+
                 </div>
-            </div>
+                <div class="col-md-12">
+                    <?= $this->pohtml->formAction(); ?>
+                </div>
+                <?= $this->pohtml->formEnd(); ?>
         </div>
+    </div>
+</div>
 
 
 <?php
